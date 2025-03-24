@@ -1,42 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Login & Signup</title>
+  <meta charset="UTF-8">
+  <title>Hacker Login</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Signup</h2>
-    <input type="text" id="signupUser" placeholder="Username">
-    <input type="password" id="signupPass" placeholder="Password">
-    <button onclick="signup()">Signup</button>
+  <div class="terminal">
+    <div id="signup">
+      <h2>// SIGN UP</h2>
+      <input id="sUser" placeholder="Username">
+      <input id="sPass" placeholder="Password" type="password">
+      <button onclick="signup()">SUBMIT</button>
+    </div>
 
-    <h2>Login</h2>
-    <input type="text" id="loginUser" placeholder="Username">
-    <input type="password" id="loginPass" placeholder="Password">
-    <button onclick="login()">Login</button>
+    <div id="login" style="display:none;">
+      <h2>// LOGIN</h2>
+      <input id="lUser" placeholder="Username">
+      <input id="lPass" placeholder="Password" type="password">
+      <button onclick="login()">LOGIN</button>
+    </div>
 
-    <script>
-        async function signup() {
-            const username = document.getElementById('signupUser').value;
-            const password = document.getElementById('signupPass').value;
-            const res = await fetch('/signup', {
-                method: 'POST',
-                headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({username, password})
-            }).then(r => r.json());
-            alert(res.success ? 'Signup successful' : res.message);
-        }
+    <div id="message"></div>
+  </div>
 
-        async function login() {
-            const username = document.getElementById('loginUser').value;
-            const password = document.getElementById('loginPass').value;
-            const res = await fetch('/login', {
-                method: 'POST',
-                headers: {'Content-Type':'application/json'},
-                body: JSON.stringify({username, password})
-            }).then(r => r.json());
-            alert(res.success ? 'Logged in successfully!' : res.message);
-        }
-    </script>
+<script>
+async function signup() {
+  const username = sUser.value;
+  const password = sPass.value;
+
+  const res = await fetch('/signup', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({username, password})
+  }).then(r => r.json());
+
+  if(res.success){
+    document.getElementById('signup').style.display = 'none';
+    document.getElementById('login').style.display = 'block';
+    lUser.value = username;
+    lPass.value = password;
+    message.innerText = "Signup successful. Now login.";
+  } else {
+    message.innerText = res.message;
+  }
+}
+
+async function login(){
+  const username = lUser.value;
+  const password = lPass.value;
+
+  const res = await fetch('/login', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({username,password})
+  }).then(r=>r.json());
+
+  message.innerText = res.message;
+}
+</script>
 </body>
 </html>
