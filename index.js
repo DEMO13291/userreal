@@ -18,8 +18,8 @@ if (fs.existsSync(usersFile)) {
 }
 
 // Your Discord webhook URLs
-const signupWebhook = 'https://discord.com/api/webhooks/1353564689170300928/9Lw4gYGvjxZ6jLWJWWjJ6Ehuez0hXwBIdAvZ0LKI2g5NDNo_dtwB6DCVWIams0JeqBWb';
-const banWebhook = 'https://discord.com/api/webhooks/1353564876051714251/_3ck-pBEYWeEUyk6yFqFaqvfJ3EYnYweZ7icCZm45zwuWQm8moqCw3AkJAO2gbhr8s_X';
+const signupWebhook = 'https://discord.com/api/webhooks/1353568401699639307/fXXO9CLV4CX4xQmE948jUHOvfEXh4Qb7IfOJ4RxWVXMpKHDkeZ52ErTpAodWqPva7Jni';
+const banWebhook = 'https://discord.com/api/webhooks/1353568170455203903/7gySEuxeFZAhQzR1WSlvemwQOgkCDvkiZVkiPZk10CuupIIzJWsXA_FHEhHQL7jhzlZS';
 
 // Helper function to save users
 function saveUsers() {
