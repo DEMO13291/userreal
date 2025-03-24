@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login & Signup</title>
+</head>
+<body>
+    <h2>Signup</h2>
+    <input type="text" id="signupUser" placeholder="Username">
+    <input type="password" id="signupPass" placeholder="Password">
+    <button onclick="signup()">Signup</button>
+
+    <h2>Login</h2>
+    <input type="text" id="loginUser" placeholder="Username">
+    <input type="password" id="loginPass" placeholder="Password">
+    <button onclick="login()">Login</button>
+
+    <script>
+        async function signup() {
+            const username = document.getElementById('signupUser').value;
+            const password = document.getElementById('signupPass').value;
+            const res = await fetch('/signup', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({username, password})
+            }).then(r => r.json());
+            alert(res.success ? 'Signup successful' : res.message);
+        }
+
+        async function login() {
+            const username = document.getElementById('loginUser').value;
+            const password = document.getElementById('loginPass').value;
+            const res = await fetch('/login', {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify({username, password})
+            }).then(r => r.json());
+            alert(res.success ? 'Logged in successfully!' : res.message);
+        }
+    </script>
+</body>
+</html>
